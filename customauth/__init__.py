@@ -175,3 +175,10 @@ class stensAuthenticator(Authenticator):
         spawner.args = ['--NotebookApp.allow_origin=*']
         spawner.args = [ '--config=/home/shared_config/jupyter_notebook_config.py']
         spawner.environment['refreshToken'] = auth_state['refreshToken'] 
+        
+async def custom_pre_spawn_hook(spawner):
+    auth_state = await spawner.user.get_auth_state()
+    print(auth_state)
+    print('this is from custom_pre_spawn_hook')
+    spawner.environment['refreshToken'] = auth_state['refreshToken']
+    #user_details = auth_state["oauth_user"]
