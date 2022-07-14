@@ -154,7 +154,7 @@ class stensAuthenticator(Authenticator):
         return {
         'name': data['name'],
         'auth_state': {
-            'studyFolder': data['studyFolder']
+            'refreshToken': data['refreshToken']
 
         }
     }
