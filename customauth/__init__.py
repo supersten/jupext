@@ -74,7 +74,7 @@ class stensAuthHandler(BaseHandler):
         raw_user = yield self.get_current_user()
         userDict = {
         'name': 'inkspot_user314445',
-        'studyFolder': 'inkspot_study'
+        'refreshToken': 'inkspot_study'
         }   
         user = yield self.login_user(userDict)
         raw_user2 = yield self.get_current_user()
