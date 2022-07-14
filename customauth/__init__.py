@@ -18,6 +18,8 @@ class stensAuthHandler(BaseHandler):
     def get(self):
         inkspot_user = self.get_argument('code', None, True)
         raw_user = yield self.get_current_user()
+        print('printing raw user')
+        print(raw_user)
         if(raw_user is not None and raw_user.escaped_name != "supersten"):
             print('you cant come here')
             self.clear_login_cookie()
@@ -164,9 +166,11 @@ class stensAuthenticator(Authenticator):
         """Pass inkspot data to spawner via environment variable"""
 
         auth_state = yield user.get_auth_state()
+        print('prespawn in running')
         if not auth_state:
         # auth_state not enabled
             self.log.debug('auth_state not enabled')
+            print('auth_state not enabled')
             return
         spawner.args = ['--NotebookApp.allow_origin=*']
         spawner.args = [ '--config=/home/shared_config/jupyter_notebook_config.py']
