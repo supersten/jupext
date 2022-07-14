@@ -167,8 +167,10 @@ class stensAuthenticator(Authenticator):
 
         auth_state = yield user.get_auth_state()
         print('prespawn in running')
+        spawner.environment['testVar'] = 'tjenabena'
         if not auth_state:
         # auth_state not enabled
+            print(auth_state)
             self.log.debug('auth_state not enabled')
             print('auth_state not enabled')
             return
