@@ -123,19 +123,18 @@ class stensAuthHandler2(BaseHandler):
         self.redirect(next_url)
 
     def get_token(self, signed_request):
-        sign, context = signed_request.split('.', 1)
-        context
+        sign, payload = signed_request.split('.', 1)
+        payload
         signature = hmac.new(
             b'ACA76D31C1FC230B34A5A9EE887C7121C5E1BA6B3C4526B2D1E3E52923A33D85',
-            msg=context.encode('utf-8'),
+            msg=payload.encode('utf-8'),
             digestmod=hashlib.sha256
-        ).hexdigest()
-        bSignature = base64.b64encode(signature.digest())
+        ).digest()
         token = None
-        if(bytes(sign, 'utf-8') == bSignature):
+        if(base64.b64decode(sign) == signature):
             print('this is from salesforce!')
             token = dict()
-            decodedContext = json.loads(base64.b64decode(context))
+            decodedContext = json.loads(base64.b64decode(payload))
             token['tkn'] = decodedContext['client']['refreshToken']
             token['user'] = decodedContext['userId']
         return token
