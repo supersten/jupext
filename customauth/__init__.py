@@ -153,6 +153,7 @@ class stensAuthenticator(Authenticator):
     @gen.coroutine
     def authenticate(self, handler, data):
         print('running authenicate')
+        print(self.enable_auth_state)
         print(data)
         return {
         'name': data['name'],
