@@ -153,6 +153,7 @@ class stensAuthenticator(Authenticator):
     @gen.coroutine
     def authenticate(self, handler, data):
         print('running authenicate')
+        print(data)
         return {
         'name': data['name'],
         'auth_state': {
@@ -182,5 +183,8 @@ async def custom_pre_spawn_hook(spawner):
     auth_state = await spawner.user.get_auth_state()
     print(auth_state)
     print('this is from custom_pre_spawn_hook')
+    if not auth_state:
+        print('auth state is not working int he custom pre-spawn')
+        auth_state = {'refreshToken' : 'stupid empty token'}
     spawner.environment['refreshToken'] = auth_state['refreshToken']
     #user_details = auth_state["oauth_user"]
