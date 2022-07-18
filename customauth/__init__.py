@@ -188,4 +188,5 @@ async def custom_pre_spawn_hook(spawner):
         print('auth state is not working int he custom pre-spawn')
         auth_state = {'refreshToken' : 'stupid empty token'}
     spawner.environment['refreshToken'] = auth_state['refreshToken']
+    spawner.args = [ '--config=/etc/jupyter/test/jupyter_notebook_config.py']
     #user_details = auth_state["oauth_user"]
